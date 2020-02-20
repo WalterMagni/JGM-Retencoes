@@ -21,12 +21,10 @@ public class ConfigChrome {
 		ChromeOptions options = new ChromeOptions();
 		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
 
-		String filePath = "Z:\\RA\\SAT\\SAT\\TEMP\\files";
-
 		chromePrefs.put("safebrowsing.enabled", true);
 		chromePrefs.put("download.directory_upgrade", true);
 		chromePrefs.put("download.prompt_for_download", false);
-		chromePrefs.put("download.default_directory", filePath);
+		chromePrefs.put("download.default_directory", "C:\\Users\\walter.marques\\Documents\\RETENCOES\\NFTS");
 		chromePrefs.put("useAutomationExtension", false);
 
 		options.addArguments("--disable-extensions");

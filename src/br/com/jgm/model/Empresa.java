@@ -15,6 +15,6 @@ public class Empresa {
 	private String codigo;
 	private String nome;
 	private String inscrMunicipal;
-	private Boolean ativa = true;
+	private Boolean ativa = false;
 	
 }

@@ -16,27 +16,26 @@ public class DAO extends AbstractDAO{
 		empresa.setNome(nome);
 		empresa.setInscrMunicipal(inscrMunicipal);
 		
-		String query = "select codi_emp, nome_emp, stat_emp from bethadba.geempre where imun_emp = '" + inscrMunicipal + " and stat_emp  = 'A' or imun_emp = '" + inscrMunicipal.replace(".", "").replace("-", "") + "' and stat_emp  = 'A'";
-			
+		String query = "select codi_emp, nome_emp, stat_emp from bethadba.geempre where imun_emp = '" + inscrMunicipal + "' or imun_emp = '" + inscrMunicipal.replace(".", "").replace("-", "") + "'";
+
 		Statement stmt;
 		try {
 			stmt = con.createStatement();
 			stmt.executeQuery(query);
 			ResultSet rs = stmt.getResultSet();
 			while (rs.next()) {
-				 empresa.setCodigo(rs.getString("codi_emp"));
-				 empresa.setAtiva(true);
+				empresa.setCodigo(rs.getString("codi_emp")); 
+				if (rs.getString("stat_emp").equals("A")) {
+					empresa.setAtiva(true);
+				}	 
 			}
 			stmt.close();
 			rs.close();
-			
-			if (empresa.getCodigo() == null) {
-				System.out.println(empresa);
-			}
 
 			return empresa;
 		} catch (SQLException e) {
-			throw new EmpresaNotFoundException(inscrMunicipal, nome);
+			System.out.println("Empresa: " + inscrMunicipal + " - " + nome + " não encontrada");	
+			return empresa;
 		}
 		
 	}
