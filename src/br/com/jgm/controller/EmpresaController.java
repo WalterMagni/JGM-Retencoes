@@ -10,7 +10,7 @@ public class EmpresaController {
 	public static Empresa retornaEmpresa (String text) {
 		
 		if (text.contains("o contribuinte desejado...")) {
-			return new Empresa("", "Desconsiderar", "", false);
+			return new Empresa("", "","", "", false);
 		} else {
 			String inscrMunicipal = text.substring(0, text.indexOf(" "));
 			String nome = text.replace(inscrMunicipal, "").replace(" - ", "").trim();		

@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import br.com.jgm.controller.EmpresaController;
 import br.com.jgm.controller.UrlController;
+import br.com.jgm.io.TransfereArquivos;
 import br.com.jgm.model.Empresa;
 import br.com.jgm.web.config.ConfigChrome;
 
@@ -48,8 +49,15 @@ public class Nav {
 				wd.chromeDriver().get(UrlController.retornaUrlEmpresa(empresa.getInscrMunicipal()));	
 				
 				if (wd.chromeDriver().findElements(By.id("ctl00_cphPopUp_lblErro")).size() == 0) {			
+					//xls
 					wd.chromeDriver().findElement(By.xpath("/html/body/form/div[3]/table/tbody/tr[7]/td/select[1]/option[3]")).click();
-					wd.chromeDriver().findElement(By.id("ctl00_cphPopUp_true_btGerar")).click();			
+					wd.chromeDriver().findElement(By.id("ctl00_cphPopUp_true_btGerar")).click();
+					//txt
+					wd.chromeDriver().navigate().refresh();
+					wd.chromeDriver().findElement(By.xpath("/html/body/form/div[3]/table/tbody/tr[7]/td/select[1]/option[1]")).click();
+					wd.chromeDriver().findElement(By.id("ctl00_cphPopUp_true_btGerar")).click();
+					Thread.sleep(3000);
+					TransfereArquivos.transfereArquivos(empresa);
 				} 
 				
 				Thread.sleep(1000);

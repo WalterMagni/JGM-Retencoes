@@ -16,7 +16,7 @@ public class DAO extends AbstractDAO{
 		empresa.setNome(nome);
 		empresa.setInscrMunicipal(inscrMunicipal);
 		
-		String query = "select codi_emp, nome_emp, stat_emp from bethadba.geempre where imun_emp = '" + inscrMunicipal + "' or imun_emp = '" + inscrMunicipal.replace(".", "").replace("-", "") + "'";
+		String query = "select codi_emp, nome_emp, apel_emp, stat_emp from bethadba.geempre where imun_emp = '" + inscrMunicipal + "' or imun_emp = '" + inscrMunicipal.replace(".", "").replace("-", "") + "'";
 
 		Statement stmt;
 		try {
@@ -25,6 +25,7 @@ public class DAO extends AbstractDAO{
 			ResultSet rs = stmt.getResultSet();
 			while (rs.next()) {
 				empresa.setCodigo(rs.getString("codi_emp")); 
+				empresa.setApelido(rs.getString("apel_emp"));
 				if (rs.getString("stat_emp").equals("A")) {
 					empresa.setAtiva(true);
 				}	 
