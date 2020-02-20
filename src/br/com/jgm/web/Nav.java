@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import br.com.jgm.controller.EmpresaController;
 import br.com.jgm.controller.UrlController;
+import br.com.jgm.model.Empresa;
 import br.com.jgm.web.config.ConfigChrome;
 
 public class Nav {
@@ -35,34 +36,28 @@ public class Nav {
 		
 		//navegar pelas empresas
 		WebElement dropDown = wd.chromeDriver().findElement(By.xpath("//*[@id=\"ctl00_body_ddlContribuinte\"]"));		
-		Iterator<WebElement> empresas = dropDown.findElements(By.tagName("option")).iterator();
+		Iterator<WebElement> empresasItr = dropDown.findElements(By.tagName("option")).iterator();
 		
 		int cont = 1;
-		while(empresas.hasNext()) {			
-			
-			WebElement empresa = wd.chromeDriver().findElement(By.xpath("//*[@id=\"ctl00_body_ddlContribuinte\"]/option[" + cont + "]"));		
-			
-			if (EmpresaController.validaEmpresa(empresa.getText()) == true) {
+		while(empresasItr.hasNext()) {			
 				
-				wd.chromeDriver().get(UrlController.retornaUrlEmpresa(empresa.getText()));
+			Empresa empresa = EmpresaController.retornaEmpresa(wd.chromeDriver().findElement(By.xpath("//*[@id=\"ctl00_body_ddlContribuinte\"]/option[" + cont + "]")).getText());
+			
+			if (empresa.getAtiva() == true) {	
 				
+				wd.chromeDriver().get(UrlController.retornaUrlEmpresa(empresa.getInscrMunicipal()));	
 				
 				if (wd.chromeDriver().findElements(By.id("ctl00_cphPopUp_lblErro")).size() == 0) {			
 					wd.chromeDriver().findElement(By.xpath("/html/body/form/div[3]/table/tbody/tr[7]/td/select[1]/option[3]")).click();
-					wd.chromeDriver().findElement(By.id("ctl00_cphPopUp_true_btGerar")).click();				
-					
-				} else {
-					System.out.println("Empresa sem serviços prestados");
-				}
-
+					wd.chromeDriver().findElement(By.id("ctl00_cphPopUp_true_btGerar")).click();			
+				} 
 				
 				Thread.sleep(1000);
-				wd.chromeDriver().navigate().back();
-				
+				wd.chromeDriver().navigate().back();				
 				
 				cont++;
 			} else {
-				System.out.println("Empresa desativa : " + empresa.getText());
+				System.out.println("Empresa desativa : " + empresa.getNome());
 				cont++;
 			}
 			

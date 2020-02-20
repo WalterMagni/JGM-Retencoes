@@ -7,29 +7,16 @@ public class EmpresaController {
 
 	private static DAO dao = new DAO();
 	
-	private static Empresa retornaEmpresa (String inscrMunicipal, String nome) {
-		return dao.getSituacaoEmpresa(inscrMunicipal, nome);
-	}
-
-	public static boolean validaEmpresa(String text) {
+	public static Empresa retornaEmpresa (String text) {
 		
-		if (text.equals("Selecione o contribuinte desejado...")) {
-			return false;
+		if (text.contains("o contribuinte desejado...")) {
+			return new Empresa("", "Desconsiderar", "", false);
 		} else {
-			
 			String inscrMunicipal = text.substring(0, text.indexOf(" "));
-			String nome = text.replace(inscrMunicipal, "").replace(" - ", "").trim();
-			Empresa emp = retornaEmpresa(inscrMunicipal, nome);
-
-			//verifica se existe a empresa consultada
-			if (emp.getAtiva().equals(true)) {
-				return true;
-			} else {
-				return false;
-			}
+			String nome = text.replace(inscrMunicipal, "").replace(" - ", "").trim();		
 			
+			return dao.getSituacaoEmpresa(inscrMunicipal, nome);
 		}
 	}
-	
 	
 }
