@@ -5,6 +5,7 @@ public class EmpresaNotFoundException extends RuntimeException{
 	
 	public EmpresaNotFoundException(String inscrMunicipal, String nome) {
 		System.out.println("Empresa: " + inscrMunicipal + " - " + nome + " não encontrada");
+		return;
 	}
 
 }
