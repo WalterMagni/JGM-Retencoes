@@ -33,7 +33,7 @@ public class EmpresaController {
 	
 			String textEmp = linhas[i].trim();
 			
-			if (textEmp.contains("o contribuinte desejado...")) {
+			if (textEmp.contains("o contribuinte desejado...") || textEmp.contains("TODOS OS CONTRIBUINTES") || textEmp.contains("T8.532.345-4 - GERSON MICHELINE (Cancelado)")) {
 				emp = new Empresa("", "","", "", false);
 			} else {
 				String inscrMunicipal = textEmp.substring(0, textEmp.indexOf(" "));

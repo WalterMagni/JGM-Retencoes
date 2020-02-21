@@ -42,9 +42,9 @@ public class NavNFTS {
 		//empresas
 		WebElement dropDown = wd.chromeDriver().findElement(By.xpath("//*[@id=\"ctl00_body_ddlContribuinte\"]"));	
 		
-		for (Empresa empresa : EmpresaController.retornaEmpresasAtivas(dropDown.getText())) {	
+		for (Empresa empresa : EmpresaController.retornaEmpresasAtivas(wd.chromeDriver().findElement(By.xpath("//*[@id=\"ctl00_body_ddlInscricao\"]")).getText())) {	
 			
-			wd.chromeDriver().get(UrlController.retornaUrlEmpresa(empresa.getInscrMunicipal()));
+			wd.chromeDriver().get(UrlController.retornaUrlNFTS(empresa.getInscrMunicipal()));
 			
 			if (wd.chromeDriver().findElements(By.id("ctl00_cphPopUp_lblErro")).size() == 0) {			
 				//xls
