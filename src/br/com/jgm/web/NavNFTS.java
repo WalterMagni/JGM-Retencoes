@@ -13,12 +13,12 @@ import br.com.jgm.io.TransfereArquivos;
 import br.com.jgm.model.Empresa;
 import br.com.jgm.web.config.ConfigChrome;
 
-public class Nav {
+public class NavNFTS {
 
 	private ConfigChrome wd;
 	private List<Empresa> empresasSemServicosPeriodo;
 	
-	public Nav() {
+	public NavNFTS() {
 		this.wd = new ConfigChrome();
 		this.empresasSemServicosPeriodo = new ArrayList<>();
 	}
@@ -62,11 +62,7 @@ public class Nav {
 		}
 		
 		GeraRelatoriosSemMovimento.geraRelatorioEmpresasSemMovimento(empresasSemServicosPeriodo);
-		
-		for (Empresa empresa : empresasSemServicosPeriodo) {
-			System.out.println(empresa);
-		}
-		
+	
 		wd.chromeDriver().close();
 
 	}
