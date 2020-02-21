@@ -12,7 +12,7 @@ public class TransfereArquivos {
 	
 	private static File pathDownloads = new File("C:\\Users\\walter.marques\\Documents\\RETENCOES\\NFTS");
 	
-	public static void transfereArquivos(Empresa empresa) {
+	public static void transfereArquivos(Empresa empresa) throws InterruptedException {
 		
 			String emp = empresa.getCodigo() + "-" + empresa.getApelido();
 			
@@ -25,13 +25,17 @@ public class TransfereArquivos {
 			for (File file : pathDownloads.listFiles()) {
 				
 				if (file.getName().startsWith("NFTS_" + empresa.getInscrMunicipal().replace(".", "").replace("-", ""))) {
-					System.out.println(file);
 					try {
 						FileUtils.copyToDirectory(file, pathDestino);
-						System.out.println("Arquivo " + file.getName() + "trasnferido para a empresa: " + emp);
 						file.delete();
 					} catch (IOException e) {
-						System.out.println("Não foi possível transferir o arquivo: " + file.getName() + " da empresa: " + emp);
+						Thread.sleep(1000);
+						try {
+							FileUtils.copyToDirectory(file, pathDestino);
+							file.delete();
+						} catch (IOException i) {
+							System.out.println("Não foi possível transferir o arquivo: " + file.getName() + " da empresa: " + emp);
+						}
 					}
 				}
 			}

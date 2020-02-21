@@ -21,4 +21,17 @@ public class DatasController {
 		}
 	}
 	
+	public static String getMes() {	
+		if (currentDate.getMonthValue() == 1) {
+			return "12";
+		} 
+		return Integer.toString(currentDate.getMonthValue() -1);
+	}
+	
+	public static String getAno() {		
+		if (getMes().equals("12")) {
+			return Integer.toString(currentDate.getYear() -1); 
+		} 	
+		return Integer.toString(currentDate.getYear());		
+	}
 }
