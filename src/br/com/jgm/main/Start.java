@@ -1,6 +1,6 @@
 package br.com.jgm.main;
 
-import br.com.jgm.web.NavGUIA;
+import br.com.jgm.web.NavNFS;
 import br.com.jgm.web.NavNFTS;
 
 public class Start {
@@ -10,9 +10,12 @@ public class Start {
 //		NavNFTS nav = new NavNFTS();		
 //		nav.navegar();
 		
-		NavGUIA nav = new NavGUIA();
-		nav.navegar();
+//		NavGUIA nav = new NavGUIA();
+//		nav.navegar();
 
+		NavNFS nav = new NavNFS();
+		nav.navegar();
+		
 	}
 
 }

@@ -22,4 +22,25 @@ public class UrlController {
 
 	}
 	
+	public static String retornaUrlNfsEmitidas(String inscrMunicipal) {
+		
+		inscrMunicipal = inscrMunicipal.replace(".", "").replace("-", "");
+		String ano = DatasController.getAno();
+		String mes = DatasController.getMes();
+
+		return "https://nfe.prefeitura.sp.gov.br/contribuinte/notasapuradas.aspx?inscricao=" + inscrMunicipal + "&cpfcnpj=&nome=&regime=2&ano=" + ano +"&mes=" + mes + "&pagas=1&pendentes=1&canceladas=1&incidencia=true";
+
+	}
+	
+	public static String retornaUrlNfsRecebidas(String inscrMunicipal) {
+		
+		inscrMunicipal = inscrMunicipal.replace(".", "").replace("-", "");
+		String ano = DatasController.getAno();
+		String mes = DatasController.getMes();
+	
+		return "https://nfe.prefeitura.sp.gov.br/contribuinte/notasrecapuradas.aspx?inscricao=" + inscrMunicipal + "&cpfcnpj=&nome=&regime=2&ano=" + ano +"&mes=" + mes + "&pagas=1&pendentes=1&canceladas=1&incidencia=true";
+
+	}
+	
+	
 }
